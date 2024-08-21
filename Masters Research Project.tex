@@ -1,0 +1,203 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools, amssymb, amsthm, amsmath, graphicx, mathrsfs, xcolor, soul}
+\newcommand{\M}{\mathscr{M}}
+\newcommand{\TL}{Temperley-Lieb }
+\newcommand{\parent}{D^2\times I}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{claim}{Claim}
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \littletaller % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
+\newcommand{\obj}[1]{\mathscr{O}_{#1}}
+
+% Custom subproof environment definition
+\newenvironment{subproof}[1][Subproof]{
+  \renewcommand{\qedsymbol}{$\blacksquare$} % Custom end symbol for subproof
+  \begin{proof}[#1]
+}{
+  \end{proof}
+}
+
+
+\begin{document}
+\section*{$\parent$ category}
+
+The category we are working in is related to the (2+1) cobordism category. Naturally, we'll be borrowing structure from this category to describe our objects. In this category, every object we deal with will be a proper embedding of some surface, $\Sigma$, into our parent space $\parent$. Unless otherwise said, we will be working in $\parent$ or some space homeomorphic to it. Let $\Sigma$ be a surface, such that,
+\begin{itemize}
+\item $\Sigma$\text{ is properly embedded in }$\parent$
+\item $\partial\Sigma$\text{ is transverse to }$\partial D^2\times$\{ 0 \}\text{ and }$\partial D^2\times$\{ 1 \}
+\end{itemize}
+
+When $\Sigma$ satisfies these requirements, we define the pair $(\parent,\Sigma)$. In addition to this pair, we'll need two more pairs to begin talking about how our objects interact with one another. Let $\xi$ and $\zeta$ be collections of arcs properly embedded in $D^2$. These embeddings of arcs define two more pairs $(D^2, \xi)$ and $(D^2, \zeta)$. 
+
+The structure preserving morhpisms in our category are ``homeomorphisms of pairs". That is, $f: (\parent,\Sigma_1)\rightarrow(\parent,\Sigma_2)$ is a homeomorphism of pairs if $f:\parent\rightarrow\parent$ and $\restr{f}{\Sigma_1}:\Sigma_1\rightarrow\Sigma_2$ are homeomorphisms. We want to relate the pairs, $(D^2,\xi)$ and $(D^2,\zeta)$, to our parent space, so we'll define homeomorphisms of pairs, $\iota_\xi$ and $\iota_\zeta$, such that,
+\begin{itemize}
+\item $\iota_\xi:(D^2,\xi)\rightarrow(D^2\times\{ 0 \}, \partial\Sigma\cap(D^2\times\{ 0 \}))$
+\item $\iota_\zeta:(D^2,\zeta)\rightarrow(D^2\times\{ 1 \}, \partial\Sigma\cap(D^2\times\{ 1 \}))$
+\end{itemize}
+
+We view our object $(\parent,\Sigma)$ as a cobordism from $(D^2,\xi)$ to $(D^2,\zeta)$. To make this rigorous, define the triple $((\parent,\Sigma),\iota_\xi((D^2,\xi)),\iota_\zeta((D^2,\zeta)))$ as our cobordism.
+
+We consider two cobordisms $((\parent,\Sigma_1),\iota_{\xi_1}((D^2,\xi_1)),\iota_{\zeta_1}((D^2,\zeta_1)))\text{ and }((\parent,\Sigma_2),$ $ \iota_{\xi_2}((D^2,\xi_2)),$ $ \iota_{\zeta_2}((D^2,\zeta_2)))$ to be equivalent if there exists a map, h, such that each of the following are homeomorphisms of pairs:
+\begin{itemize}
+\item $h:(\parent,\Sigma_1)\rightarrow(\parent,\Sigma_2)$ 
+\item $h\circ\iota_{\xi_1}: (D^2,\xi_1)\rightarrow\iota_{\xi_2}((D^2,\xi_2))$
+\item $h\circ\iota_{\zeta_1}: (D^2,\zeta_1)\rightarrow\iota_{\zeta_2}((D^2,\zeta_2))$
+\end{itemize}
+
+The set of equivalence classes of cobordisms from $(D^2, \xi)$ to $(D^2,\zeta)$ is denoted as $\emph{Mor}((D^2,\xi),(D^2,\zeta))$. Let $(\parent,\Sigma_1)\in\emph{Mor}((D^2,\xi_1),(D^2,\zeta_1))\text{ and }(\parent,\Sigma_2)\in\emph{Mor}((D^2,\zeta_1'),(D^2,\xi_2))$. The operation, 
+\[ (\parent,\Sigma_1) \bigcup_{\iota_{\zeta_1'}\circ(\iota_{\zeta_1})^{-1}}(\parent,\Sigma_2)\]
+admits an new corbordism $((\parent,\Sigma_1\circ\Sigma_2),\iota_{\xi_1}((D^2,\xi_1)),\iota_{\xi_2}((D^2,\xi_2)))$, which admits a well-defined class $\Sigma_1\circ\Sigma_2=(\parent,\Sigma_1)\circ(\parent,\Sigma_2)\in\textit{Mor}((D^2,\xi_1),(D^2,\xi_2))$. Thus, idempotents in our category must be of the form $\Sigma=(\parent,\Sigma)\in\emph{Mor}((D^2,\xi),(D^2,\xi))$, such that $\Sigma = \Sigma\circ\Sigma$. We'll often suppress the extra structure and address our cobordisms as $\Sigma$, when context is understood.
+\vspace{5mm}
+
+
+
+
+
+
+
+\subsection*{Elevating the Temperley-Lieb Category}
+\,\indent	To construct our morphisms in the \TL category, we start by taking two parallel rows of n finitely many dots. We then pair the dots by smooth, planar 1-manifolds. These connecting 1-manifolds must lie in the rectangle which frames the rows of dots, and they are identified up to planar isotopy. The \TL category is a monoidal category in which all idempotents split \cite{Abramsky}. 
+
+Since the \TL category can be envisioned as a diagram of properly embedded arcs into $I^2$, we'll recast our objects and morphsims in the notation of our work. As previously stated, the parent space for the \TL category is the space $I\times I$, or simply $I^2$, where I is the compact interval $I = [0,1]$. The morphisms are properly embedded, non-intersecting arcs, denoted as $\alpha$. The endpoints of $\alpha$ are the dots in the parallel rows, discussed prior. We can define an object uniquely then as the pair $(I^2, \alpha)$[\textbf{Note:} $\alpha$ can be represented as a collection of ordered pairs (x,y)]. Since $\parent \cong I^3$, we can extend the objects $(I^2,\alpha)$ into $I^3$ by the following operation $\emph{ext}: (I^2,\alpha)\rightarrow(I^3, \alpha\times I) \text{, such that } (I^2,(x,y)) \mapsto (I^3, \{ x \}\times I\times\{ y \})$.
+
+
+If $\partial\Sigma \subset (I\times (\{ 0 \} \cup \{ 1 \})\times I)\cup (I\times I\times(\{ 0 \}\cup\{ 1 \}))$, and $\Sigma$ can be foliated into line segments, then it comes from the \TL category.
+
+%"Many elements in the $\parent$ which can be folliated into line-segments come from the \TL category" (Softening of conditions).
+
+
+
+
+\subsection*{Elevating the Tangle Category}
+	The Tangle category is a category of 1-manifolds which are properly embedded into $\parent$. Since the Tangle category and our category work in the same space, we'll extend the 1-manifolds into 2-manifolds and obtain morphism in the $\parent$ category, which aren't results of an extension from the \TL category. Similar to the \TL category, all idempotents split in the Tangle category\cite{BS}. If we let $N_{a_i}$ be a closed, regular neighborhood of $a_i$ and take the closure of the boundary of $N_{a_i}$ around our properly embedded 1-manifold intersected with the interior of our parent space, we'll get properly embedded 2-manifolds with the following properties:
+\begin{itemize}
+\item \text{Let } $a_i$ \text{ be a properly embedded arc into }$\parent$\text{. Then, there exists an operation,} $f: (\parent, a_i)\rightarrow(\parent,\Sigma_i)$\text{ such that, }$\Sigma_i = cl(\partial N_{a_i}\cap int(\parent))$
+\item \text{For all i, }$\partial\Sigma_i\subset (D^2\times\{ 0 \}\cup D^2 \times\{ 1 \})$
+%\item \text{For all i, }cl(\partial N_{a_i}\cap int(\parent))\text{ bounds a } B^3_i\text{ and } \bigcap^n_{i=1}B^3_i = \O
+\end{itemize}
+
+
+Likewise, we know a surface $\Sigma \subset \parent$ is from the Tangle Category if $\Sigma$ is a collection of annuli that only have boundary in $\partial_+\parent\cup\partial_-\parent$ and \[\text{for all i, }cl(\partial N_{a_i}\cap int(\parent))\text{ bounds a } B^3_i\text{ and } \bigcap^n_{i=1}B^3_i = \O\].
+
+\subsection*{Euler Characteristic}
+The Euler characteristic is a topological invariant which describes the shape of a given surface. Given any surface, we can take it's triangulization and count the number of verticies, edges and faces, labeled V, E, and F, respectively. The Euler characteristic for a surface, $\Sigma$, is then defined as
+\[ \chi(\Sigma) = V-E+F \]
+Objects in our category are collections of disjoint, compact surfaces embedded into a parent space, specfically $\parent$. If $\Sigma = \{ \Sigma_i \}_{i=1}^n$ where each $\Sigma_i$ is a disjoint compact surface properly embedded into $\parent$, then the Euler characteristic of our object is given by:
+\[ \chi(\Sigma) = \sum\limits_{i=1}^n \chi(\Sigma_i)\]
+By elementary properties of the Euler characteristic, we can also assert that the given two surfaces $\Sigma_1$ and $\Sigma_2$, the euler characteristic of their composition can be written as, 
+\[ \chi(\Sigma_1\circ\Sigma_2) = \chi(\Sigma_1)+\chi(\Sigma_2)-\chi(\Sigma_1\cap\Sigma_2)\]
+
+\subsection*{boundary components}
+
+Boundary components are defined as the union of disjoint connected pieces of the boundary. In other words, if $B_i$ is a connected subset of the boundary of the surface S, denoted $\partial S$, then
+\[\partial S = \bigcup_i B_i\]
+
+Some facts that will prove useful to us are as follows:
+
+\begin{enumerate}
+\item $b(F) = \sum_{i=0}^{n} b(f_i)-\alpha$
+\item $\chi(F) = \sum_{i=0}^{n} \chi(f_i)-\sum_{j=0}^{n-1}\chi(\mathscr{O}_j)$; Where $\mathscr{O}_j$ is the object between $f_j$ and $f_{j+1}$
+\item $\alpha = \sum_{i=0}^{n}\alpha_i$; where $\alpha_i$ is a parameter derived from the composition of $f_i$ and $f_{i+1}$
+\end{enumerate}
+
+Since our space is compact, our functions are only defined for finite compositions.
+
+\subsection*{genus}
+Suppose we have a connected, orientable, compact space. the genus is defined to be 
+\[ g(\Sigma) = \frac{2-\chi(\Sigma)}{2} \]
+and if the surface has boundary components,
+\[g(\Sigma) = \frac{2-\chi(\Sigma) - b(\Sigma)}{2}\]
+where b($\Sigma$) denotes the number of boundary components for a given surface.
+
+Unfortunately, most of the surfaces in $\parent$ category won't be connected surfaces. In the case that our surface is compact, but not connected, we define the genus of the surface to be the sum of the genera of each disjoint connected surface in the space:
+\[ g(\Sigma) = \sum_{i=1}^n g(\sigma)\]
+where $\sigma$ is a connected subspace of $\Sigma$. Now, we want to show that the genus of our surfaces is superadditive in our category.
+\begin{theorem}The genus of compact surfaces properly embedded into a compact 3-manifold is superadditive under composition. \end{theorem}
+\begin{proof}
+This proof is little more than simple algebra and manipulation of our facts about boundary components previously discussed. We'll begin with the base case, $n=2$. Given a surface, F, which is composed of two subsurfaces, $f_1$ and $f_2$, where they meet at a surface $\mathscr{O}$ with a complexity of $\alpha$, we know the following:
+\[
+b(F) = b(f_1) + b(f_2)-\alpha
+\]
+Now, applying this to the definition for genus, we have
+\begin{align*}
+g(F) &= \frac{2-\chi(F)-(b(f_1)+b(f_2)-\alpha)}{2}\\
+&= \frac{2-(\chi(f_1)+\chi(f_2)-\chi(\mathscr{O}))-b(f_1)-b(f_2)+\alpha}{2}\\
+&= \frac{2-\chi(f_1)-b(f_1)}{2} + \frac{2-\chi(f_2)-b(f_2)}{2} + \frac{\chi(\mathscr{O})+\alpha-2}{2}\\
+&= g(f_1) + g(f_2) + \frac{\chi(\mathscr{O}) + \alpha -2}{2}
+\end{align*}
+\begin{claim}
+Let $\mathscr{O}$ be the object between two composed surfaces and $\alpha$ be the complexity parameter for the composition of the two surfaces. Then, $\chi(\mathscr{O})+\alpha \geq 2 $
+\end{claim}
+\begin{subproof}
+$\chi(\mathscr{O})$ is equivalent to the number of arcs properly embedded into $D^2$. So, let $\chi(\mathscr{O}) = n$. By the definition of alpha, we know
+\begin{align*}
+b(F) &= b(f_1)+b(f_2)-\alpha\\
+\alpha &= b(f_1)+b(f_2)-b(F)\\
+\alpha &= 2-n = -(n-2)
+\end{align*}
+Thus, $\alpha = -(n-2)$ is the minimum value $\alpha$ can obtain. If we substitute this back into $\chi(\mathscr{O})+\alpha$, we get
+\[\chi(\mathscr{O})+\alpha \geq n-(n-2) = n-n+2 = 2\]
+Thus, $\chi(\mathscr{O}) + \alpha \geq 2$
+\end{subproof}
+So, since we now know that $\chi(\mathscr{O})+\alpha \geq 2$, we can assert
+\[g(F) = g(f_1) + g(f_2)+\frac{\chi(\mathscr{O}) + \alpha -2}{2} \geq g(f_1)+g(f_2)\]
+Thus, completeing our proof.
+\end{proof}
+
+
+%\subsection*{$\parent$}
+%	Now where we intend to investigate how these extensions impact the idempotency of objects of the form $(\parent, \phi_1(\obj{1}),\phi_2(\obj{2}),\beta)$. The extensions act as subsets of all splittable idempotents in the new category, since we can take the countable tensor product (countable disjoint union) of disks and annuli, we can get objects that are splittable, but in neither the TL category extention or the Tangle category extention.\subsubsection{boundary components}
+
+
+
+
+\section*{Saguaro Idempotents}
+The first class of idempotents we will study, which don't come from the \TL category or the Tangle category, will be from our Saguaro objects, named after the similarity of shape to the saguaro cactus. These objects are defined as surfaces which, for any given disk, F, which intersects the boundary of $\parent$, not in the upper or lower boundary disk, a saguaro, S, does not intersect the boundary of F. That is, $S\cap\partial F = \O$, as in the following figure. 
+
+\begin{theorem}
+ Every saguaro idempotent contains an incompressible, non-boundary parallel surface. 
+\end{theorem}
+
+\begin{proof}
+Let S be a saguaro idempotent and assume that S contains disks. WLOG, assume $\partial D_0\subset D^2\times\{ 0 \}$, where $D_0$ is a disk in S. Observe the outermost component of $(D^2\times\{ 0 \})-\partial S$, which is incident to $\partial D_0$, is a planar surface and $\partial\overline{\eta(D_0)}$ contains a compressing disk for $(D^2\times\{ 0 \})-\partial S$.
+
+Since any saguaro idempotent with a disk must have a compressing disk in our boundary, we will now consider only saguaro idempotents with no disks. Now, we'll consider the types of surfaces we can have in S. Since S is a saguaro idempotent, we know the following:
+\[\partial_-(S)=\partial_+(S)\]
+\[\partial_-(S) = \amalg_{i=1}^k(S^1_i)\]
+\[\chi(S) = \chi(S)+\chi(S)-\chi(\partial_-(S))\]
+From these results, we can conclude $\chi(S) = 2\chi(S)-\chi(\amalg_{i=1}^k(S^1_i))$. Since the $\chi(S^1) = 0$, the term $\chi(\amalg_i(S^1_i)) = 0$ and $\chi(S) = 2\chi(S)$, from which we can surmise that $\chi(S) = 0$. 
+
+Now, let F be a saguaro idempotent and let $F = \bigcup\limits_{i=1}^kF_i$, where $F_i$ is connected, compact, and orientable. Moreover, $F_i\not\cong S^2$ and $F_i\not\cong D^2$. However, 
+\[\chi(F) = \sum\limits_{i=1}^k\chi(F_i)\leq 0\]
+Since $\chi(F) = 0$,
+\[0 = \sum\limits_{i=1}^kF_i\leq0\]
+So, $\chi(F_i) = 0$ for all $i\in\{ 1,\hdots,k \}$. By our previous theorem, F cannot have genus, thus, $F_i\cong S^1\times I$, for all $i\in\{ 1,\hdots,k \}$.
+\end{proof} 
+
+\section*{Where we want to take it}
+Since the writing of the last proof, we've encounted a few problematic conditions. We've developed an idempotent, which can be split, but does not have a compressing disk in either boundary. The "bad" idempotents, which are still splitable, but without the requirements expected, are constructs from the \TL category elevated to our category in a way we hadn't thought about before. These idempotents are objects from the \TL category which are rotated around an axis of symmetry. This process produces saguaro idempotents, which do not have disks in either boundary. 
+
+Potential reasons for why this may be happening and causing an issue include the separating nature of our embedded surfaces, since a surface separates the parent space into at least two distinct parts. This separation of the domain leads to strange relationships in the idempotents, such as "quasi-" boundary parallel surfaces. These instances need to be studied more and possible have more examples produced to see the relationship, if any, between them and splittability. 
+
+We wish to proceed with the study of idempotency of idempotents infected with a "bad" idempotent to possibly produce futher examples of our "bad" annulus. While we speculate that the infected idempotent is still (splittable) idempotent, we'll need to make sure the idempotent being embedded inside is proven to be splittable. 
+
+One proposed method of finishing the proof is to isotope the "bad" annuli into a small $\epsilon$ neighborhood of their respective boundaries, and then looking at the middle section of the idempotent, for any compressing disks which may exist in there. This looks similar to the arguement in \cite{Abramsky}, which looks at the "epic" and "monic" characteristics of the composed mappings. However, this leaves us with questions of the idempotency of the middle section. An arguement, akin to Abramsky's, may be adopted to prove the splittablility of these idempotent, however, we are ultimately looking for a more topological approach. 
+
+
+
+
+
+\begin{thebibliography}{2}
+\bibitem{Abramsky} Samson Abramsky, \emph{Temperley-lieb algebra: from knot theory to logic and computation via quantum mechanics}, Mathematics of quantum computation and
+quantum technology, 2007, pp. 515–558.
+\bibitem{BS} Ryan Blair, Joshua Sack, \emph{Idempotents in Tangle Categories Split}, Arxiv, 2017 \\https://doi.org/10.48550/ARXIV.1801.00230
+\end{thebibliography}
+
+\end{document}
